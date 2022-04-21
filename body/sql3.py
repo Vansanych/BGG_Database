@@ -1,7 +1,7 @@
 import sqlite3
 from logpas import x
 
-base = sqlite3.connect('SQL3.db')
+base = sqlite3.connect('../files/SQL3.db')
 cur = base.cursor()
 
 base.execute('CREATE TABLE IF NOT EXISTS {}(login PRIMARY KEY, password)'.format('data'))

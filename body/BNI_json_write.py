@@ -10,5 +10,5 @@ req = requests.get(url)
 t = req.json()
 post_list = t["response"]["items"]
 
-with open('BNI_21_04_22.json', 'w') as f:
+with open('BNI_25_04_22.json', 'w') as f:
     f.write(json.dumps(t))

@@ -1,7 +1,7 @@
 from sorting_posts import sell_posts_list
 import re
 
-post = sell_posts_list[1]
+post = sell_posts_list[0]
 print(post)
 positions = post.split('\n')
 

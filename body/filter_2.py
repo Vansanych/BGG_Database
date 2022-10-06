@@ -1,6 +1,6 @@
 """
 filter_1 возвращает список первых слов из строчек поста в качестве имен игр
-BNI_19_04_22[20]
+BNI_19_04_22[20, 23]
 """
 from sorting_posts import sell_posts_list
 import re
@@ -19,7 +19,7 @@ def filter_1(strings):
     return names_list
 
 
-post_number = 20
+post_number = 23
 post = sell_posts_list[post_number]
 strings = post.split('\n')
 names_list = []

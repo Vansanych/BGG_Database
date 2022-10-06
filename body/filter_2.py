@@ -21,7 +21,6 @@ post_number = 45
 post = sell_posts_list[post_number]
 strings = post.split('\n')
 names_list = []
-games = {}
 
-print(post)
-print(filter_2(strings))
+# print(post)
+# print(filter_2(strings))

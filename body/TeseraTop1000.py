@@ -1,3 +1,8 @@
+"""
+получает json-файлы по 15 игр из Топ Тесеры
+"""
+
+
 import requests
 import json
 

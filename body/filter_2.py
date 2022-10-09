@@ -1,5 +1,5 @@
 """
-filter_1 возвращает список первых слов из строчек поста в качестве имен игр
+filter_2 возвращает список первых слов из строчек поста в качестве имен игр
 BNI_19_04_22[20, 44]
 """
 from sorting_posts import sell_posts_list
@@ -23,4 +23,4 @@ strings = post.split('\n')
 names_list = []
 
 # print(post)
-# print(filter_2(strings))
+names = filter_2(strings)

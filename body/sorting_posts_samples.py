@@ -1,10 +1,9 @@
 from sorting_posts import sell_posts_list
-import re
+from get_price import prices
 
-post = sell_posts_list[3]
+post = sell_posts_list[0]
 print(post)
 positions = post.split('\n')
 
-from get_price import prices
 print(prices)
 

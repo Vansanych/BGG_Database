@@ -17,7 +17,9 @@ for post in sell_posts_list:
                     if int(integer) % 10 == 0 or re.findall('\\d+[9]', integer):
                         prices.append(integer)
                         counter_prices += 1
-
-    print(counter, prices)
-    counter += 1
-print(counter_prices)
+    if __name__ == '__main__':
+        print(counter, prices)
+        counter += 1
+if __name__ == '__main__':
+    print(counter_prices)
+    print(sell_posts_list[0])

@@ -3,8 +3,10 @@
 Затем сравнивает вторые слова
 """
 
-from filter_3 import names
+from filter_3 import filter_2, get_strings
 import json
+
+names = filter_2(get_strings(2))
 
 
 def open_file(number, language):

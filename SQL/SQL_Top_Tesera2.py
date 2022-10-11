@@ -10,7 +10,6 @@ with open(fr'../TopList/Top900_1.json') as file:
 str_key_list = ', '.join([x for x in games[0].keys()])  # создание строки с именами ключей для названия столбцов таблицы
 
 base.execute(f'CREATE TABLE IF NOT EXISTS data ({str_key_list})')  # создание столбцов таблицы
-base.commit()
 
 for number, game in enumerate(games):
     print(number)

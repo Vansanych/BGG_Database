@@ -6,16 +6,19 @@ import json
 
 with open(fr'../TopList/Top900.json') as file:
     g = json.load(file)
-    for r in range(len(g)):
-        key_list = []
-        for key in g[r].keys():
-            key_list.append(key)
+    for number, game in enumerate(g):
+        key_list = [key for key in game]
         if len(key_list) != 31:
-            g[r]['title2'] = g[r].get('title2')
-            g[r]['title3'] = g[r].get('title2')
-            g[r]['descriptionShort'] = g[r].get('descriptionShort')
-            g[r]['description'] = g[r].get('description')
-            print(r, [x for x in g[0].keys() if x not in g[r].keys()])
+            new_dict = {}
+            for key in g[0].keys():
+                game[key] = game.get(key)
+            value_list = [value for value in game.values()]
+            key_list = [key for key in g[0].keys()]
+            for i in range(len(key_list)):
+                new_dict[key_list[i]] = game[key_list[i]]
+            game = new_dict
 
-with open(fr'../TopList/Top900_1.json', 'w+') as file:
+            print(number, [x for x in g[0].keys() if x not in game.keys()])
+
+with open(fr'../TopList/Top900_2.json', 'w+') as file:
     file.write(json.dumps(g, indent=4))

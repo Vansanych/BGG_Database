@@ -13,9 +13,12 @@ for number, game in enumerate(g):
         new_dict = {}
         for key in g[0].keys():
             game[key] = game.get(key)  # заполнение пропущенных пар
+        print(id(game))
         for key in base_key_list:
             new_dict[key] = game[key]  # составление словаря с одинаковым порядком ключей
-        game = new_dict
+        game.clear()
+        for key in base_key_list:
+            game[key] = new_dict[key]
 
         print(number, [x for x in g[0].keys() if x not in game.keys()])
 

@@ -13,12 +13,10 @@ str_key_list = ', '.join([x for x in key_list])
 base.execute(f'CREATE TABLE IF NOT EXISTS data ({str_key_list})')
 base.commit()
 
-with open(fr'../TopList/Top900_1.json') as file:
-    g = json.load(file)
-    for r in range(len(g)):
-        values_list = []
-        for value in g[r].values():
-            values_list.append(value)
-        print(r)
-        cur.execute(f'INSERT INTO data VALUES({", ".join("?"*len(g[r]))})', values_list)
-        base.commit()
+for r in range(len(g)):
+    values_list = []
+    for value in g[r].values():
+        values_list.append(value)
+    print(r)
+    cur.execute(f'INSERT INTO data VALUES({", ".join("?"*len(g[r]))})', values_list)
+    base.commit()

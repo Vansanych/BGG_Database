@@ -12,6 +12,6 @@ for game in all_names:
     base2.execute('CREATE TABLE IF NOT EXISTS "{}" (id PRIMARY KEY, name, price, date, town, text)'.format(alias))
     # создание столбцов таблицы
     # cur2.execute(f'INSERT INTO {alias} VALUES({", ".join("?" * len(game))})', [value for value in game.values()])
-base.commit()
+base2.commit()
 
 

@@ -30,5 +30,6 @@ for name in names:
     else:
         trash_list.append(name)
 
-print("names: ", names_list)
-print("trash: ", trash_list)
+if __name__ == '__main__':
+    print("names: ", names_list)
+    print("trash: ", trash_list)

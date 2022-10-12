@@ -2,7 +2,7 @@ import sqlite3
 import json
 
 
-base = sqlite3.connect('Tesera_Top2.db')  # создание базы
+base = sqlite3.connect('Tesera_Top2.db')  # соединение с базой
 cur = base.cursor()
 
 with open(fr'../TopList/Top900_1.json') as file:

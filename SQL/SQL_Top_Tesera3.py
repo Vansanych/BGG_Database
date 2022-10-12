@@ -22,4 +22,4 @@ for number, game in enumerate(games):
     except Exception as ex:
         print(ex)
     # заполнение таблицы
-    base.commit()
+base.commit()

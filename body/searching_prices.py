@@ -2,21 +2,35 @@ from sorting_posts import sell_posts_list
 from search_names_2 import names_list
 import re
 
-post = sell_posts_list[5]  # выбираем номер поста
+post = sell_posts_list[7]  # выбираем номер поста
 post_clear = re.sub("\W", " ", post)  # удаляет знаки препинания
-words_list = post_clear.split()  # разбивает пост на отдельные слова
 digits = re.findall('\d+', post_clear)  # находим цифры в посте
 prices = [price for price in digits if int(price) // 50 and int(price) < 100_000]  # составляем список цен
 price_list = {}
 for name in names_list:
+    print(name)
     for price in prices:
-        if type(name) == list:
-            if words_list.index(price) > words_list.index(name[0]):
+        print(price)
+        post_clear = re.sub(f'{price}\D', f'{price}', post_clear)  # убираем знаки после цены в посте
+        words = post_clear.split()
+        print(price, post_clear.index(price), name[0], post_clear.index(name[0]))
+        if type(name) == list:  # проверка количества слов в названии (одно или два)
+            if post_clear.index(price) > post_clear.index(name[0]):  # Здесь ошибка. Находит первое совпадение.
+                # нужно удалять из поста неподходящие цены
                 price_list[name[0] + ' ' + name[1]] = price  # присваиваем названию игры стоимость, ближайшую по тексту
+                prices.pop(prices.index(price))
                 break
+            else:
+                words = words.pop(words.index(price))
+
+            #     prices.pop(prices.index(price))  надо попробовать этот вариант
+            #     post_clear = re.sub(f'{price}', '', price_post)  # убираем неподходящую цену в посте
+            #     (ошибка - убирает все цены)
+            #     prices.pop(prices.index(price))
         else:
-            if words_list.index(price) > words_list.index(name):
+            if post_clear.index(price) > post_clear.index(name):
                 price_list[name] = price  # присваиваем названию игры стоимость, ближайшую по тексту
+                prices.pop(prices.index(price))
                 break
 
 print(post)

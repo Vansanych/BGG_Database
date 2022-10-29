@@ -8,5 +8,5 @@ print(post_clear)
 match = re.match('1500', post)
 print(match[0])
 
-h = [1, 4, 5]
+h = [1, 4]
 print(h.index(1, 0))

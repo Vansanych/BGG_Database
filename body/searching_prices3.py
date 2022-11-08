@@ -22,16 +22,15 @@ words = post_clear.split()
 def searching_function(first_name, lst, price):
     lst = lst[lst.index(first_name)::]  # поиск начинается с названия игры
     text = " ".join(lst)  # объединяем список из слов в текст
-    # print(price, text[:200:], '\n')
+    print(text[:150:], '\n')
     try:
-        match = re.search(f'{price}', text)[0]  # выполняем поиск цифр
+        match = re.search('\d{3,5}', text)[0]  # выполняем поиск цифр
         return match
     except Exception as ex:
         return 0
 
 
 for name in names_list:
-    print(name)
     if type(name) == list:  # проверка количества слов в названии
         for any_price in prices:
             price = searching_function(name[0], words, any_price)

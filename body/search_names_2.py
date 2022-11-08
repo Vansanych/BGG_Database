@@ -6,7 +6,7 @@
 from filter_3 import filter_2, get_strings
 import json
 
-names = filter_2(get_strings(2))
+names = filter_2(get_strings(16))
 
 
 def open_file(number, language):
@@ -24,12 +24,14 @@ trash_list = []
 for name in names:
     if name[0] in first_tesera_rus or name[0] in first_tesera_eng:
         if name[1].capitalize() in second_tesera_rus or name[1].capitalize() in second_tesera_eng:
-            names_list.append(str(name[0] + ' ' + name[1]))
+            names_list.append([name[0], name[1]])
         else:
             names_list.append(name[0])
     else:
         trash_list.append(name)
 
-if __name__ == '__main__':
-    print("names: ", names_list)
-    print("trash: ", trash_list)
+
+
+# if __name__ == '__main__':
+    # print("names: ", names_list)
+    # print("trash: ", trash_list)

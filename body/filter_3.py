@@ -11,7 +11,6 @@ def filter_2(strings):
     for string in strings:
         words = string.split()
         if len(words) > 1:
-            print(words)
             if re.search(r'[0-9]', words[0]):
                 words.pop(0)
             try:
@@ -25,9 +24,4 @@ def filter_2(strings):
 
 def get_strings(post_number):
     post = sell_posts_list[post_number]
-    print(post)
     return post.split('\n')
-
-
-# names = filter_2(get_strings(1))
-# print(names)

@@ -9,14 +9,13 @@ import re
 
 
 post = sell_posts_list[23]  # выбираем номер поста
-print(post, '\n')
 price_list = {}
 
 
 def searching_function(first_name, lst):
     lst = lst[lst.index(first_name)::]  # поиск начинается с названия игры
     try:
-        match = re.search('\d{2,4}[0]', lst)[0]  # выполняем поиск цифр
+        match = re.search('\d{2,4}[0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
         return match
     except Exception as ex:
         return 0

@@ -10,17 +10,13 @@ import re
 
 post = sell_posts_list[20]  # выбираем номер поста
 print(post, '\n')
-post_clear = re.sub("\W", " ", post)  # удаляет знаки препинания
 price_list = {}
-words = post_clear.split()
 
 
 def searching_function(first_name, lst):
     lst = lst[lst.index(first_name)::]  # поиск начинается с названия игры
-    text = " ".join(lst)  # объединяем список из слов в текст
-    print(text[:150:], '\n')
     try:
-        match = re.search('\d{3,5}', text)[0]  # выполняем поиск цифр
+        match = re.search('\d{3,5}', lst)[0]  # выполняем поиск цифр
         return match
     except Exception as ex:
         return 0
@@ -28,11 +24,10 @@ def searching_function(first_name, lst):
 
 for name in names_list:
     if type(name) == list:  # проверка количества слов в названии
-        price = searching_function(name[0], words)
+        price = searching_function(name[0], post)
         price_list[name[0] + ' ' + name[1]] = price  # присваиваем названию игры стоимость, ближайшую по тексту
     else:
-        price = searching_function(name, words)
+        price = searching_function(name, post)
         price_list[name] = price  # присваиваем названию игры стоимость, ближайшую по тексту
-
 
 print(price_list)

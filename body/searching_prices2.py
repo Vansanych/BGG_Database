@@ -8,7 +8,7 @@ from search_names_2 import names_list
 import re
 
 
-post = sell_posts_list[7]  # выбираем номер поста
+post = sell_posts_list[16]  # выбираем номер поста
 print(post, '\n')
 post_clear = re.sub("\W", " ", post)  # удаляет знаки препинания
 digits = re.findall('\d+', post_clear)  # находим цифры в посте
@@ -25,18 +25,24 @@ def searching_function(first_name, lst):
 
 
 for name in names_list:
-    if type(name) == list:
+    if type(name) == list:  # проверка количества слов в названии
         price = searching_function(name[0], words)
         if price in prices:
             price_list[name[0] + ' ' + name[1]] = price  # присваиваем названию игры стоимость, ближайшую по тексту
         else:
+            post_clear = re.sub(f'{price}\S+', f'{price}', post_clear)
+            words = post_clear.split()
             words.pop(words.index(price))
+            price = searching_function(name[0], words)
+            price_list[name[0] + ' ' + name[1]] = price  # присваиваем названию игры стоимость, ближайшую по тексту
     else:
         price = searching_function(name, words)
         if price in prices:
             price_list[name] = price  # присваиваем названию игры стоимость, ближайшую по тексту
         else:
             words.pop(words.index(price))
+            price = searching_function(name, words)
+            price_list[name] = price  # присваиваем названию игры стоимость, ближайшую по тексту
 
 
 print(price_list)

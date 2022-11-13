@@ -18,7 +18,7 @@ def filter_2(strings):
                 words[1] = re.sub(r'\W', '', words[1])
                 names_list.append([words[0], words[1]])
             except Exception as ex:
-                print(ex, ' - after delete digits in words')
+                print('filter_3', ex, ' - after delete digits in words')
     return names_list
 
 

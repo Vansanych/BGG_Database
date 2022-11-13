@@ -10,3 +10,7 @@ print(match[0])
 
 h = [1, 4]
 print(h.index(1, 0))
+
+f = [1, 5, 6, 3]
+g = f[0]
+print(g, f[f.index(g)+1])

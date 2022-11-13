@@ -15,7 +15,7 @@ def searching_function(first_name, next_name, lst):
         else:
             lst = lst[lst.index(first_name):lst.index(next_name):]  # поиск начинается с названия игры
     except Exception as ex:
-        print(ex, first_name)
+        print('searching_prices3', ex, first_name)
     try:
         match = re.search('\d{1,3}[0|5][0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
         return match
@@ -27,7 +27,7 @@ def searching_function_last_name(first_name, lst):
     try:
         lst = lst[lst.index(first_name)::]  # поиск начинается с названия игры
     except Exception as ex:
-        print(ex, first_name)
+        print('searching_prices3', ex, first_name)
     try:
         match = re.search('\d{2,4}[0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
         return match

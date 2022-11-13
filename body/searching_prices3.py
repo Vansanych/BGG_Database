@@ -29,7 +29,7 @@ def searching_function_last_name(first_name, lst):
     except Exception as ex:
         print('searching_prices3', ex, first_name)
     try:
-        match = re.search('\d{2,4}[0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
+        match = re.search('\d{1,3}[0|5][0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
         return match
     except Exception as ex:
         return None

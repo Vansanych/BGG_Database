@@ -3,19 +3,20 @@
 Затем объединяет в словарь с названием игры.
 """
 
-from sorting_posts import sell_posts_list
-from search_names_2 import search_names
+from body.sorting_posts import sell_posts_list
+from body.search_names_2 import search_names
 import re
 
 
 def searching_function(first_name, next_name, lst):
+    ex_list = []
     try:
         if type(next_name) == list:
             lst = lst[lst.index(first_name):lst.index(next_name[0]):]  # поиск начинается с названия игры
         else:
             lst = lst[lst.index(first_name):lst.index(next_name):]  # поиск начинается с названия игры
     except Exception as ex:
-        print('searching_prices3', ex, first_name)
+        ex_list.append(first_name)
     try:
         match = re.search('\d{1,3}[0|5][0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
         return match
@@ -24,10 +25,11 @@ def searching_function(first_name, next_name, lst):
 
 
 def searching_function_last_name(first_name, lst):
+    ex_list = []
     try:
         lst = lst[lst.index(first_name)::]  # поиск начинается с названия игры
     except Exception as ex:
-        print('searching_prices3', ex, first_name)
+        ex_list.append(first_name)
     try:
         match = re.search('\d{1,3}[0|5][0]', lst)[0]  # выполняем поиск цифр (3-5 значных с нолем в конце)
         return match

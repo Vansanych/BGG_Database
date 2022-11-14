@@ -3,7 +3,7 @@
 Затем сравнивает вторые слова
 """
 
-from filter_3 import filter_2, get_strings
+from body.filter_3 import filter_2, get_strings
 import json
 
 

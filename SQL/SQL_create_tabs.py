@@ -1,10 +1,14 @@
+"""
+Модуль для создания базы с пустыми таблицами для каждой игры
+"""
+
 import sqlite3
 
 base = sqlite3.connect('Tesera_Top2.db')  # соединение с исходной базой
 base2 = sqlite3.connect('Games3.db')  # соединение с новой базой
 cur = base.cursor()
 cur2 = base2.cursor()
-cur.execute('SELECT title FROM data')
+cur.execute('SELECT title FROM data')  # выбирает все ячейки из колонки title на листе data
 all_names = cur.fetchall()
 for game in all_names:
     alias = game[0].replace('"', '')

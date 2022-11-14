@@ -1,4 +1,4 @@
-from BNI_json_read import post_list
+from body.BNI_json_read import post_list
 
 posts_text = []
 for post in post_list:

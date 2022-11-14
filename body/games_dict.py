@@ -2,8 +2,8 @@
 Модуль создания словаря из словарей игр с ценами
 """
 
-from searching_prices3 import search_prices  # импорт функции создания словаря с игрой и ее ценой
-from sorting_posts import sell_posts_list  # импорт списка постов
+from body.searching_prices3 import search_prices  # импорт функции создания словаря с игрой и ее ценой
+from body.sorting_posts import sell_posts_list  # импорт списка постов
 
 
 def dict_games_with_prices():
@@ -15,6 +15,3 @@ def dict_games_with_prices():
         except Exception as ex:
             print('initialize module', ex)
     return games_dict
-
-
-print(dict_games_with_prices())

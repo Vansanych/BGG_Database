@@ -1,4 +1,4 @@
-from get_list_post_text import posts_text
+from body.get_list_post_text import posts_text
 
 sell_posts_list = []
 other_posts_list = []

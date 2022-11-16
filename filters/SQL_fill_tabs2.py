@@ -19,14 +19,13 @@ for post_id in dict_games:
         name_tuple = cur.fetchone()  # находит первое совпадение
         if name_tuple:
             name = name_tuple[0]
-            print(name)
             date = dict_games[post_id][0]
             text = dict_games[post_id][2]
             try:
                 cur2.execute(f'INSERT INTO "{name}" (id, name, date, text) '
                              f'VALUES ("{post_id}", "{name}", "{date}", "{text}")')
             except Exception as ex:
-                print(ex, '\n')
+                pass
 
         # запись названия игры в таблицу data
 base2.commit()  # запись изменений

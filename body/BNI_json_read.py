@@ -5,5 +5,6 @@ with open('../files/BNI_19_04_22.json') as file:
 
 post_list = last_posts["response"]["items"]
 if __name__ == '__main__':
-    print('id:', post_list[0]['id'], '\n')
-    print(post_list[0]['text'])
+    print('id:', post_list[2]['id'])
+    print('date', post_list[2]['date'], '\n')
+    print(post_list[2]['text'])

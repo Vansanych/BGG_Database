@@ -21,3 +21,7 @@ g = (1,)
 a = g[0]
 
 print(a)
+
+g_list = []
+g_list.append([1, None])
+print('g_list', g_list)

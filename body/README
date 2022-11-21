@@ -10,3 +10,41 @@ filter_2 возвращает список первых слов из строч
 BNI_19_04_22[20, 44]
 
 search_names сравнивает первые слова из постов со словарем названий игр из Топ Тесеры
+
+1. body.BNI_json_read
+Выполняет чтение из json-файла
+создает список постов
+
+2. body.get_list_post_text
+Создает словарь игр с датой и ID
+from body.BNI_json_read (1) import post_list
+
+
+3. body.sorting_posts Сортирует посты на посты о продаже и на прочие посты
+from body.get_list_post_text (2) import posts_text # импорт текста постов
+
+4. body.filter_3
+Возвращает список двух первых слов из строчек поста в качестве имен игр
+from body.sorting_posts (3) import sell_posts_list
+
+
+5. body.search_names_2
+Сравнивает первые слова названий из постов БНИ со списком первых слов из названий игр из Топ Тесеры.
+Затем сравнивает вторые слова
+from body.filter_3 (4) import filter_2, get_strings
+
+
+6. body.searching_prices3
+Модуль выполняет поиск цен.
+Затем объединяет в словарь с названием игры.
+from body.sorting_posts (3) import sell_posts_list
+from body.search_names_2 (5) import search_names
+
+
+7. body.games_dict Модуль создания словаря из словарей игр с ценами
+from body.searching_prices3 (6) import search_prices  # импорт функции создания словаря с игрой и ее ценой
+from body.sorting_posts (3) import sell_posts_list  # импорт списка постов
+
+
+8. SQL_fill_tabs Модуль для заполнения таблиц для каждой игры.
+Импортирует словарь из словарей игр с ценами из модуля body.games_dict (7)

@@ -13,5 +13,5 @@ def dict_games_with_prices():
             if search_prices(post):  # проверка на наличие записей в словаре
                 games_dict[post] = search_prices(post)  # добавление словаря созданного из одного поста
         except Exception as ex:
-            print('initialize module', ex)
+            print('games_dict', ex)
     return games_dict

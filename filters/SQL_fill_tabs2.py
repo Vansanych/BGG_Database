@@ -5,7 +5,7 @@
 import sqlite3
 from body.searching_prices4 import full_dict
 
-base = sqlite3.connect('Tesera_Top2.db')  # соединение с базой Top900
+base = sqlite3.connect('../SQL/Tesera_Top3.db')  # соединение с базой Top900
 base2 = sqlite3.connect('Games4.db')  # соединение с базой по продаже игр
 cur = base.cursor()
 cur2 = base2.cursor()
@@ -18,7 +18,6 @@ for post_id in dict_games:
         name_tuple = cur.fetchone()  # находит первое совпадение
         if name_tuple:
             name = name_tuple[0]
-            print(name)
             date = dict_games[post_id][0]
             price = dict_games[post_id][1][game][0]
             text = dict_games[post_id][1][game][1]
@@ -28,5 +27,4 @@ for post_id in dict_games:
             except Exception as ex:
                 print(ex)
 
-        # запись названия игры в таблицу data
 base2.commit()  # запись изменений

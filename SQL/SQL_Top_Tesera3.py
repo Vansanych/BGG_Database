@@ -1,11 +1,11 @@
 """
-Заполняет базу без дубликатов
+Создает базу игр по ТОП Тесеры (без дубликатов)
 """
 
 import sqlite3
 import json
 
-base = sqlite3.connect('Tesera_Top3.db')  # создание базы
+base = sqlite3.connect(fr'../filters/Tesera_Top3.db')  # создание базы
 cur = base.cursor()
 
 with open(fr'../TopList/Top900_1.json') as file:

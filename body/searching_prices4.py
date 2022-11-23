@@ -65,7 +65,7 @@ for post_id in dict_games:
     # print(post_id)
     for game in dict_games[post_id][1]:
         counter += 1
-        print(counter, game)
+        # print(counter, game)
         price = dict_games[post_id][1][game][0]
         # print(price)
 

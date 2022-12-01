@@ -31,8 +31,8 @@ for post_text in posts_text:
 
 for post in post_dict:
     if any(word in post_dict[post][1] for word in sell_words):
-        sell_posts_dict[post] = [post_dict[post][0], post_dict[post][1]]
+        sell_posts_dict[post] = [post_dict[post][0], post_dict[post][1]]  # формируется словарь постов о продаже
 
-
-# for post in sell_posts_list:
-#     print(post[:100:], "\n")
+if __name__ == '__main__':
+    for post in sell_posts_dict:
+        print(sell_posts_dict[post][1], "\n")

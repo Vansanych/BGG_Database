@@ -1,5 +1,6 @@
 """
-Модуль для заполнения таблиц для каждой игры
+Модуль для заполнения таблиц для каждой игры.
+Заполняет столбцы с датой, ценой, и текстом поста.
 """
 
 import sqlite3
@@ -13,7 +14,7 @@ cur2 = base2.cursor()
 dict_games = full_dict
 for post_id in dict_games:
     for game in dict_games[post_id][1]:
-        cur.execute('SELECT title FROM data WHERE title LIKE "%{}%"'.format(game))
+        cur.execute(f'SELECT title FROM data WHERE (title LIKE "%{game[0]}%") OR (title2 LIKE "%{game[0]}%")')
         # выборка из базы Тесера по названию игры
         name_tuple = cur.fetchone()  # находит первое совпадение
         if name_tuple:
@@ -26,5 +27,7 @@ for post_id in dict_games:
                              f'VALUES ("{post_id}", "{name}", "{price}", "{date}", "{text}")')
             except Exception as ex:
                 print(ex)
+        else:
+            print(game, "нет в Топ 900 Тесеры")
 
 base2.commit()  # запись изменений

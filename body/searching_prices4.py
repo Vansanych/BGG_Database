@@ -41,11 +41,13 @@ def search_prices(names_list, post):
     price_list = {}
     for name in names_list:
         if names_list.index(name) != len(names_list)-1:
+            # print(name)
+            # print('error', searching_function(name[0], names_list[names_list.index(name)+1], post))
             price = searching_function(name[0], names_list[names_list.index(name)+1], post)
-            price_list[name[0] + ' ' + str(name[1])] = price  # присваиваем названию игры стоимость, ближайшую по тексту
+            price_list[(name[0], str(name[1]))] = price  # присваиваем названию игры стоимость, ближайшую по тексту
         else:
             price = searching_function_last_name(name[0], post)
-            price_list[name[0] + ' ' + str(name[1])] = price  # присваиваем названию игры стоимость, ближайшую по тексту
+            price_list[(name[0], str(name[1]))] = price  # присваиваем названию игры стоимость, ближайшую по тексту
 
     return price_list
 
@@ -57,7 +59,9 @@ for post_id in full_dict:
     text = full_dict[post_id][2]
     full_dict[post_id][1] = search_prices(names, text)
     del(full_dict[post_id][2])
+    print(full_dict[post_id])
     # print(search_prices(names, text))
+    # print(full_dict[[i for i in full_dict.keys()][0]])
 
 counter = 0
 dict_games = full_dict

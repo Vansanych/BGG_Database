@@ -55,7 +55,7 @@ def search_names_from_dict(names):
 def search_matches_from_sql(table, words):
     """Функция для поиска слова из названия игры среди названий игр ТОП 900 Тесеры.
     Выдает кортеж из названий игр содержащих искомое слово"""
-    base = sqlite3.connect('../SQL/Tesera_Top3.db')  # соединение с базой Top900
+    base = sqlite3.connect('../filters/Tesera_Top5000.db')  # соединение с базой Top900
     cur = base.cursor()
     cur.execute(f'SELECT "{table}" FROM data WHERE "{table}" LIKE "%{words[0]}%"')
     # выборка из базы Тесера по названию игры
@@ -69,7 +69,8 @@ def search_words_in_tuple(names_tuple, words):
     for name_t in names_tuple:
         names_list = [words[0]]
         for word in words[1:]:
-            if word.capitalize() in name_t[0].split():  # name_t[0] индекс нужен потому что это кортеж
+            if word.capitalize() in name_t[0].split() or word in name_t[0].split():
+                # name_t[0] индекс нужен потому что это кортеж
                 names_list.append(word)
             # else:
             #     print(word, 'not in ', name_t)
@@ -105,11 +106,12 @@ def create_names_list(x):
 
 
 full_dict = {}
-# post_id = 414882
+# for post_id in range(414131, 414132):
 for post_id in sell_posts_dict:
     print(post_id, 'body.search_names_2')
     if create_names_list(post_id):
         full_dict[post_id] = [sell_posts_dict[post_id][0], create_names_list(post_id), sell_posts_dict[post_id][1]]
+        print(full_dict[post_id])
 
 if __name__ == '__main__':
     pass

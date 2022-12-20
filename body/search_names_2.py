@@ -84,6 +84,7 @@ def search_names_from_dict2(names_list):
     new_names_list = []
     columns_list = ['title', 'title2', 'title3']
     for words in names_list:
+        print(words)
         names_tuple_list = []
         for column in columns_list:
             names_tuple_list.append(search_matches_from_sql(column, words))
@@ -96,6 +97,7 @@ def search_names_from_dict2(names_list):
                 list_len_words_list_title = [len(lst) for lst in list_words_lists_title]  # список длин списков
                 ind_list_len = max(list_len_words_list_title)  # поиск максимальной длины списка
                 words_list_title = list_words_lists_title[list_len_words_list_title.index(ind_list_len)]
+                print(words_list_title)
                 if words_list_title:
                     new_names_list.append(words_list_title)
     return new_names_list
@@ -104,19 +106,20 @@ def search_names_from_dict2(names_list):
 def create_names_list(x):
     post = sell_posts_dict[x][1]
     post = re.sub(',', ' ', post)
-    strings = re.split(r'\d\d\d+', post)
+    strings = post.split('\n')
     # for number, words in enumerate(strings):
     #     print(number, words)
-    # print(strings[0])
+    # print(strings)
     names_list = filter_22(strings)
+    # print(names_list)
     # print(1, search_names_from_dict(names_list))
     # print(2, search_names_from_dict2(names_list))
     return search_names_from_dict2(names_list)
 
 
 full_dict = {}
-for post_id in range(414134, 414135):
-# for post_id in sell_posts_dict:
+# for post_id in range(414134, 414135):
+for post_id in sell_posts_dict:
     print(post_id, 'body.search_names_2')
     words_in_name = create_names_list(post_id)
     if words_in_name:

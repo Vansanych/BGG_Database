@@ -8,6 +8,7 @@ from body.filter_3 import filter_22, get_strings
 from body.sorting_posts import sell_posts_dict
 import json
 import sqlite3
+import re
 
 
 def open_file(number, language):
@@ -64,7 +65,7 @@ def search_matches_from_sql(column, words):
 
 
 def search_words_in_tuple(names_tuple, words):
-    names_list = [words[0]]
+    names_list = []
     new_words_list = names_list  # нужно для дальнейшего сравнения длин списков
     for name_t in names_tuple:
         name_t = str(name_t[0]).replace(':', ' ').replace('.', ' ')  # name_t[0] индекс нужен потому что это кортеж
@@ -81,27 +82,32 @@ def search_words_in_tuple(names_tuple, words):
 def search_names_from_dict2(names_list):
     """Функция составляет список слов названий из одного поста"""
     new_names_list = []
+    columns_list = ['title', 'title2', 'title3']
     for words in names_list:
-        names_tuple = search_matches_from_sql('title', words)
-        names_tuple2 = search_matches_from_sql('title2', words)
-        names_tuple3 = search_matches_from_sql('title3', words)
-        if names_tuple or names_tuple2 or names_tuple3:
-            words_list_title1 = search_words_in_tuple(names_tuple, words)
-            words_list_title2 = search_words_in_tuple(names_tuple2, words)
-            words_list_title3 = search_words_in_tuple(names_tuple3, words)
-            list_words_lists_title = [words_list_title3, words_list_title2, words_list_title1]
-            # список списков слов из названий игр по результатам поиска среди кортежей
-            # трех столбцов SQL title1, title2, title3
-            list_len_words_list_title = [len(lst) for lst in list_words_lists_title]  # список длин списков
-            ind_list_len = max(list_len_words_list_title)  # поиск максимальной длины списка
-            words_list_title = list_words_lists_title[list_len_words_list_title.index(ind_list_len)]
-            new_names_list.append(words_list_title)
+        names_tuple_list = []
+        for column in columns_list:
+            names_tuple_list.append(search_matches_from_sql(column, words))
+        if names_tuple_list:
+            list_words_lists_title = []
+            for words_list_title in names_tuple_list:
+                name_words_list = search_words_in_tuple(words_list_title, words)
+                list_words_lists_title.append(name_words_list)
+            if len(list_words_lists_title) > 1:
+                list_len_words_list_title = [len(lst) for lst in list_words_lists_title]  # список длин списков
+                ind_list_len = max(list_len_words_list_title)  # поиск максимальной длины списка
+                words_list_title = list_words_lists_title[list_len_words_list_title.index(ind_list_len)]
+                if words_list_title:
+                    new_names_list.append(words_list_title)
     return new_names_list
 
 
 def create_names_list(x):
     post = sell_posts_dict[x][1]
-    strings = post.split('\n')
+    post = re.sub(',', ' ', post)
+    strings = re.split(r'\d\d\d+', post)
+    # for number, words in enumerate(strings):
+    #     print(number, words)
+    # print(strings[0])
     names_list = filter_22(strings)
     # print(1, search_names_from_dict(names_list))
     # print(2, search_names_from_dict2(names_list))

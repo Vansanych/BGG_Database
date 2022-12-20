@@ -52,12 +52,12 @@ def search_names_from_dict(names):
     return names_list
 
 
-def search_matches_from_sql(table, words):
+def search_matches_from_sql(column, words):
     """Функция для поиска слова из названия игры среди названий игр ТОП 900 Тесеры.
     Выдает кортеж из названий игр содержащих искомое слово"""
     base = sqlite3.connect('../filters/Tesera_Top5000.db')  # соединение с базой Top900
     cur = base.cursor()
-    cur.execute(f'SELECT "{table}" FROM data WHERE "{table}" LIKE "%{words[0]}%"')
+    cur.execute(f'SELECT "{column}" FROM data WHERE "{column}" LIKE "%{words[0]}%"')
     # выборка из базы Тесера по названию игры
     name_tuple = cur.fetchall()  # находит все совпадения
     return name_tuple
@@ -67,32 +67,35 @@ def search_words_in_tuple(names_tuple, words):
     names_list = [words[0]]
     new_words_list = names_list  # нужно для дальнейшего сравнения длин списков
     for name_t in names_tuple:
+        name_t = str(name_t[0]).replace(':', ' ').replace('.', ' ')  # name_t[0] индекс нужен потому что это кортеж
         names_list = [words[0]]
         for word in words[1:]:
-            if word.capitalize() in name_t[0].split() or word in name_t[0].split():
-                # name_t[0] индекс нужен потому что это кортеж
+            if (word.capitalize() in name_t.split()) or (word.lower() in name_t.split()):
+                # поиск слов с заглавной и прописной букв
                 names_list.append(word)
-            # else:
-            #     print(word, 'not in ', name_t)
         if len(names_list) > len(new_words_list):
             new_words_list = names_list
-    if len(new_words_list) < 2:  # нужно проверить необходимость этого условия
-        new_words_list.append('')
     return new_words_list
 
 
 def search_names_from_dict2(names_list):
     """Функция составляет список слов названий из одного поста"""
-    # print(names_list, '\n')
     new_names_list = []
     for words in names_list:
         names_tuple = search_matches_from_sql('title', words)
-        if names_tuple:
-            new_names_list.append(search_words_in_tuple(names_tuple, words))
-        else:
-            names_tuple = search_matches_from_sql('title2', words)
-            if names_tuple:
-                new_names_list.append(search_words_in_tuple(names_tuple, words))
+        names_tuple2 = search_matches_from_sql('title2', words)
+        names_tuple3 = search_matches_from_sql('title3', words)
+        if names_tuple or names_tuple2 or names_tuple3:
+            words_list_title1 = search_words_in_tuple(names_tuple, words)
+            words_list_title2 = search_words_in_tuple(names_tuple2, words)
+            words_list_title3 = search_words_in_tuple(names_tuple3, words)
+            list_words_lists_title = [words_list_title3, words_list_title2, words_list_title1]
+            # список списков слов из названий игр по результатам поиска среди кортежей
+            # трех столбцов SQL title1, title2, title3
+            list_len_words_list_title = [len(lst) for lst in list_words_lists_title]  # список длин списков
+            ind_list_len = max(list_len_words_list_title)  # поиск максимальной длины списка
+            words_list_title = list_words_lists_title[list_len_words_list_title.index(ind_list_len)]
+            new_names_list.append(words_list_title)
     return new_names_list
 
 
@@ -106,12 +109,14 @@ def create_names_list(x):
 
 
 full_dict = {}
-# for post_id in range(414131, 414132):
-for post_id in sell_posts_dict:
+for post_id in range(414134, 414135):
+# for post_id in sell_posts_dict:
     print(post_id, 'body.search_names_2')
-    if create_names_list(post_id):
-        full_dict[post_id] = [sell_posts_dict[post_id][0], create_names_list(post_id), sell_posts_dict[post_id][1]]
-        print(full_dict[post_id])
+    words_in_name = create_names_list(post_id)
+    if words_in_name:
+        full_dict[post_id] = [sell_posts_dict[post_id][0], words_in_name, sell_posts_dict[post_id][1]]
+        print(full_dict[post_id][1])
+        print(full_dict[post_id][2])
 
 if __name__ == '__main__':
     pass

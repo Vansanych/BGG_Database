@@ -104,8 +104,9 @@ def search_names_from_dict2_old(strings):
 def search_names_from_dict2(strings):
     """Функция составляет список слов названий из одного поста"""
     new_names_list = []
+    best_match = None
     columns_list = ['title', 'title2', 'title3']
-    for words in strings[4:6]:  # words = []
+    for words in strings:  # words = []
         name_words_list = []
         print(words)
         for column in columns_list:
@@ -116,9 +117,10 @@ def search_names_from_dict2(strings):
                     name_words_list_new = search_words_in_tuple(name_tuple, words)
                     if len(name_words_list_new) > len(name_words_list):
                         name_words_list = name_words_list_new
-        print(name_words_list)
+                        best_match = name_tuple[0]
+        print(name_words_list, '\n', best_match)
         if name_words_list:
-            new_names_list.append(name_words_list)
+            new_names_list.append(best_match)
     return new_names_list
 
 

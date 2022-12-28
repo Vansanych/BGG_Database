@@ -5,10 +5,10 @@
 import sqlite3
 import json
 
-base = sqlite3.connect(fr'../filters/Tesera_Top3.db')  # создание базы
+base = sqlite3.connect(fr'../filters/Tesera_Top5000_1.db')  # создание базы
 cur = base.cursor()
 
-with open(fr'../TopList/Top900_1.json') as file:
+with open(fr'../TopList/Top5000_2.json') as file:
     games = json.load(file)
 str_key_list = ', '.join([x for x in games[0].keys()][1:])
 # создание строки с именами ключей для названия столбцов таблицы

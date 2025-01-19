@@ -14,7 +14,7 @@ date = datetime.date.today()
 
 
 def json_file():
-    with open(f'C:/Users/Иван/Desktop/Иван/python/BG_database/files/BNI_{date}.json', 'w+') as f:
+    with open(f'C:/Users/Иван/Desktop/Иван/python/pythonProject/BG_database/files/BNI_{date}.json', 'w+') as f:
         f.write(json.dumps(t))
 
 

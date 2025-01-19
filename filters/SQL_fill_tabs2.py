@@ -7,13 +7,14 @@ import sqlite3
 from body.searching_prices4 import full_dict
 
 base = sqlite3.connect('../SQL/Tesera_Top3.db')  # соединение с базой Top900
-base2 = sqlite3.connect('Games5.db')  # соединение с базой по продаже игр
+base2 = sqlite3.connect('Games5_3.db')  # соединение с базой по продаже игр
 cur = base.cursor()
 cur2 = base2.cursor()
 
 for post_id in full_dict:
     for game in full_dict[post_id][1]:
-        cur.execute(f'SELECT title FROM data WHERE (title LIKE "%{game[0]}%") OR (title2 LIKE "%{game[0]}%")')
+        f_n_game = game.split()[0]
+        cur.execute(f'SELECT title FROM data WHERE (title LIKE "%{f_n_game}%") OR (title2 LIKE "%{f_n_game}%")')
         # выборка из базы Тесера по названию игры
         name_tuple = cur.fetchone()  # находит первое совпадение
         if name_tuple:
